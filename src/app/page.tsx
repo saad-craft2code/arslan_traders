@@ -5,11 +5,11 @@ import { Hero } from '@/components/site/hero';
 import { FeaturedProducts } from '@/components/site/featured-products';
 import { Categories } from '@/components/site/categories';
 import { Catalog } from '@/components/site/catalog';
+import { BulkOrders } from '@/components/site/bulk-orders';
 import { About } from '@/components/site/about';
 import { Contact } from '@/components/site/contact';
 import { Footer } from '@/components/site/footer';
 import { ProductModal } from '@/components/site/product-modal';
-import { AdminPanel } from '@/components/site/admin-panel';
 import { FloatingActions } from '@/components/site/floating-actions';
 
 export default function Home() {
@@ -21,6 +21,7 @@ export default function Home() {
         <FeaturedProducts />
         <Categories />
         <Catalog />
+        <BulkOrders />
         <About />
         <Contact />
       </main>
@@ -28,7 +29,6 @@ export default function Home() {
 
       {/* Overlays */}
       <ProductModal />
-      <AdminPanel />
       <FloatingActions />
     </div>
   );

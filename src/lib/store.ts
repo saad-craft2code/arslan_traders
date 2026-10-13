@@ -12,7 +12,6 @@ const DEFAULT_FILTERS: FilterState = {
 
 type StoreState = {
   // UI state
-  isCartOpen: boolean;
   isFiltersOpen: boolean;
   isProductModalOpen: boolean;
   selectedProductId: string | null;
@@ -20,10 +19,6 @@ type StoreState = {
 
   // Filter state
   filters: FilterState;
-
-  // Admin panel state
-  isAdminOpen: boolean;
-  adminView: 'products' | 'add-product' | 'categories' | 'add-category' | 'settings';
 
   // Actions
   setSelectedProduct: (id: string | null) => void;
@@ -34,21 +29,15 @@ type StoreState = {
   setFilter: <K extends keyof FilterState>(key: K, value: FilterState[K]) => void;
   setFilters: (filters: Partial<FilterState>) => void;
   resetFilters: () => void;
-  setAdminOpen: (open: boolean) => void;
-  setAdminView: (view: 'products' | 'add-product' | 'categories' | 'add-category' | 'settings') => void;
 };
 
 export const useStore = create<StoreState>((set) => ({
-  isCartOpen: false,
   isFiltersOpen: false,
   isProductModalOpen: false,
   selectedProductId: null,
   isMobileMenuOpen: false,
 
   filters: DEFAULT_FILTERS,
-
-  isAdminOpen: false,
-  adminView: 'products',
 
   setSelectedProduct: (id) => set({ selectedProductId: id }),
   openProductModal: (id) => set({ isProductModalOpen: true, selectedProductId: id }),
@@ -60,6 +49,4 @@ export const useStore = create<StoreState>((set) => ({
   setFilters: (filters) =>
     set((state) => ({ filters: { ...state.filters, ...filters } })),
   resetFilters: () => set({ filters: DEFAULT_FILTERS }),
-  setAdminOpen: (open) => set({ isAdminOpen: open }),
-  setAdminView: (view) => set({ adminView: view }),
 }));

@@ -139,7 +139,11 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-background/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-background/50">
           <p>© {new Date().getFullYear()} Arslan Traders. All rights reserved.</p>
-          <p>Office Furniture Store · Rawalpindi & Islamabad, Pakistan</p>
+          <div className="flex items-center gap-4">
+            <a href="/admin" className="hover:text-background/80 transition-colors">Admin Login</a>
+            <span className="opacity-50">·</span>
+            <p>Office Furniture · Rawalpindi & Islamabad, Pakistan</p>
+          </div>
         </div>
       </div>
     </footer>

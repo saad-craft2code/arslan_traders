@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Settings, Phone } from 'lucide-react';
+import { Menu, X, Phone, Package } from 'lucide-react';
 import { useStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const { setMobileMenuOpen, isMobileMenuOpen, setAdminOpen, setAdminView } = useStore();
+  const { setMobileMenuOpen, isMobileMenuOpen } = useStore();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -21,6 +21,7 @@ export function Navbar() {
     { label: 'Home', href: '#home' },
     { label: 'Catalog', href: '#catalog' },
     { label: 'Categories', href: '#categories' },
+    { label: 'Bulk Orders', href: '#bulk' },
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -40,15 +41,15 @@ export function Navbar() {
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3 group">
             <div className="relative">
-              <div className="w-11 h-11 rounded-2xl bg-brand-gradient flex items-center justify-center shadow-brand transition-transform group-hover:scale-105">
-                <span className="font-fraunces text-2xl font-semibold text-white">A</span>
+              <div className="w-11 h-11 rounded-2xl bg-foreground flex items-center justify-center shadow-soft transition-transform group-hover:scale-105">
+                <span className="font-display text-2xl font-extrabold italic text-brand-orange">A</span>
               </div>
             </div>
             <div className="hidden sm:block leading-tight">
-              <div className="font-fraunces text-xl font-semibold tracking-tight text-foreground">
+              <div className="font-display text-xl font-bold tracking-tight text-foreground">
                 Arslan Traders
               </div>
-              <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground font-medium">
+              <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground font-semibold">
                 Office Furniture · RWP / ISB
               </div>
             </div>
@@ -60,7 +61,7 @@ export function Navbar() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="px-4 py-2 text-[15px] font-medium text-foreground/80 hover:text-foreground rounded-full hover:bg-accent/60 transition-all"
+                  className="px-4 py-2 text-[15px] font-semibold text-foreground/80 hover:text-foreground rounded-full hover:bg-accent/60 transition-all"
                 >
                   {item.label}
                 </a>
@@ -72,23 +73,19 @@ export function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="tel:+923345121727"
-              className="hidden md:flex items-center gap-2 text-[14px] font-semibold text-foreground hover:text-primary transition-colors"
+              className="hidden md:flex items-center gap-2 text-[14px] font-bold text-foreground hover:text-primary transition-colors"
             >
               <Phone className="w-4 h-4" />
               <span>0334 5121727</span>
             </a>
 
-            <button
-              onClick={() => {
-                setAdminView('products');
-                setAdminOpen(true);
-              }}
-              className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-brand-gradient text-white text-[14px] font-semibold hover:shadow-brand transition-all hover:scale-[1.02] active:scale-95"
-              aria-label="Open admin panel"
+            <a
+              href="#bulk"
+              className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-gradient text-white text-[14px] font-bold hover:shadow-brand transition-all hover:scale-[1.03] active:scale-95"
             >
-              <Settings className="w-4 h-4" />
-              <span>Admin</span>
-            </button>
+              <Package className="w-4 h-4" />
+              <span>Get Bulk Quote</span>
+            </a>
 
             <button
               onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
@@ -127,7 +124,7 @@ export function Navbar() {
                     <a
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-lg font-medium text-foreground hover:bg-accent/60 rounded-2xl transition-colors"
+                      className="block px-4 py-3 text-lg font-semibold text-foreground hover:bg-accent/60 rounded-2xl transition-colors"
                     >
                       {item.label}
                     </a>
@@ -137,24 +134,21 @@ export function Navbar() {
               <div className="mt-4 pt-4 border-t border-border space-y-3">
                 <a
                   href="tel:+923345121727"
-                  className="flex items-center gap-3 text-[15px] font-semibold text-foreground"
+                  className="flex items-center gap-3 text-[15px] font-bold text-foreground"
                 >
                   <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
                     <Phone className="w-4 h-4" />
                   </div>
                   <span>0334 5121727</span>
                 </a>
-                <button
-                  onClick={() => {
-                    setAdminView('products');
-                    setAdminOpen(true);
-                    setMobileMenuOpen(false);
-                  }}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-brand-gradient text-white font-semibold"
+                <a
+                  href="#bulk"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-brand-gradient text-white font-bold"
                 >
-                  <Settings className="w-4 h-4" />
-                  Admin Panel
-                </button>
+                  <Package className="w-4 h-4" />
+                  Get Bulk Quote
+                </a>
               </div>
             </motion.div>
           </motion.div>

@@ -1,20 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
-const inter = Inter({
-  variable: "--font-inter",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const SITE_URL = "https://arslantraders.pk";
@@ -43,6 +45,8 @@ export const metadata: Metadata = {
     "modular office furniture",
     "ergonomic chairs Islamabad",
     "business furniture Pakistan",
+    "bulk office furniture",
+    "office furniture wholesale",
   ],
   authors: [{ name: "Arslan Traders", url: SITE_URL }],
   creator: "Arslan Traders",
@@ -104,8 +108,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F5F1EA" },
-    { media: "(prefers-color-scheme: dark)", color: "#1A1410" },
+    { media: "(prefers-color-scheme: light)", color: "#FAFAF7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
   ],
   colorScheme: "light dark",
 };
@@ -181,7 +185,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${fraunces.variable} antialiased bg-background text-foreground`}
+        className={`${playfair.variable} ${jakarta.variable} antialiased bg-background text-foreground`}
       >
         {children}
         <Toaster />

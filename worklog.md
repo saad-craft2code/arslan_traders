@@ -26,3 +26,38 @@ Stage Summary:
 - All lint passes (0 errors, 0 warnings)
 - All interactive flows verified via agent-browser
 - Dev server running on port 3000
+
+---
+Task ID: 2 (redesign)
+Agent: main-agent (Super Z)
+Task: Redesign website with fresh color theme (away from bronze), bigger bolder classy fonts, separate /admin route, hero with Pexels video, bulk ordering section, no admin button on navbar.
+
+Work Log:
+- Found working Pexels video URL: https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4
+- Swapped fonts to Playfair Display (display) + Plus Jakarta Sans (body) via next/font
+- Rewrote globals.css with fresh theme: warm off-white background + ink black text + burnt orange brand accent (oklch(0.55 0.165 38))
+- Increased typography scale: text-display up to clamp(3.5rem, 9vw, 8.5rem), text-hero up to clamp(2.75rem, 6vw, 5rem), all weight 700-800
+- Updated favicon with new black/orange brand mark
+- Rebuilt Hero with full-screen video background + cross-fading furniture image carousel (5 images), big bold serif headline "Office Furniture, Built to Inspire" with italic emphasis, scroll indicator, image dot navigation
+- Updated Navbar: removed Admin button, added "Get Bulk Quote" CTA, added Bulk Orders nav link
+- Added BulkOrder model to Prisma schema (name, email, phone, company, city, productType, quantity, budget, message, status), pushed to Neon
+- Created /api/bulk-order routes (GET list, POST create, PUT update status, DELETE)
+- Built BulkOrders section with: 4 benefit cards, full quote request form (name/email/phone/company/city/quantity/productType/budget/message), success confirmation state, side info panels (who we serve, bulk pricing tiers, prefer to talk)
+- Created /admin route as full-page admin dashboard with sidebar nav (Overview, Products, Bulk Orders, Categories) and 6 admin views: Overview stats, Products list, Add/Edit Product form, Categories list, Add/Edit Category form, Bulk Orders manager with status workflow (new→contacted→completed), WhatsApp link per order
+- Removed old AdminPanel sheet from main page, removed admin-panel.tsx component
+- Updated page.tsx to include BulkOrders section between Catalog and About
+- Updated footer to add subtle Admin Login link
+- Cleaned store.ts (removed admin panel state)
+- Ran lint - 0 errors 0 warnings
+- Browser-verified: homepage renders, hero video loads, bulk order form submits successfully (saved to DB), admin dashboard shows received order with status management
+- VLM confirmed: "classy and professional design, fresh rust-orange accents on cream/white, big bold serif headline, well-structured layout"
+- VLM on admin: "clean and professional, minimalist aesthetic, stats highly visible in prominent cards"
+
+Stage Summary:
+- New fresh classy theme: warm cream + ink black + burnt orange brand accent
+- Bigger bolder classy typography: Playfair Display headlines + Plus Jakarta Sans body
+- Hero: Pexels video background + 5-image cross-fade carousel + animated Ken Burns effect
+- /admin route is now a separate full-page dashboard with sidebar nav, 6 management views, bulk order workflow
+- Bulk ordering feature: full quote request form saves to DB, admin can view/mark contacted/complete/WhatsApp
+- Navbar: no admin button, prominent "Get Bulk Quote" CTA instead
+- Lint passes; all flows browser-verified

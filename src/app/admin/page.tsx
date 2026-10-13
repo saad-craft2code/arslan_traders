@@ -1,0 +1,12 @@
+import type { Metadata } from 'next';
+import AdminDashboard from './admin-dashboard';
+
+export const metadata: Metadata = {
+  title: 'Admin Dashboard',
+  description: 'Manage products, categories and bulk orders for Arslan Traders.',
+  robots: { index: false, follow: false },
+};
+
+export default function AdminPage() {
+  return <AdminDashboard />;
+}

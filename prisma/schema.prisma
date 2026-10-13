@@ -51,3 +51,22 @@ model Product {
   @@index([price])
   @@index([featured])
 }
+
+model BulkOrder {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  company     String?
+  city        String?
+  productType String?
+  quantity    Int
+  budget      String?
+  message     String
+  status      String   @default("new")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
