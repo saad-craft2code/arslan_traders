@@ -1,17 +1,16 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Star, ArrowRight } from 'lucide-react';
 import type { Product } from '@/lib/types';
 import { formatPrice, calculateDiscount } from '@/lib/format';
-import { useStore } from '@/lib/store';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export function FeaturedProducts() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const { openProductModal } = useStore();
 
   useEffect(() => {
     fetch('/api/products?featured=true&limit=4&sort=popular')
@@ -37,17 +36,17 @@ export function FeaturedProducts() {
             <div className="text-[12px] uppercase tracking-[0.18em] text-primary font-semibold mb-2">
               Handpicked for you
             </div>
-            <h2 className="font-fraunces text-hero text-foreground text-balance">
+            <h2 className="font-display text-hero text-foreground text-balance">
               Featured pieces
             </h2>
           </div>
-          <a
-            href="#catalog"
+          <Link
+            href="/catalog"
             className="hidden sm:flex items-center gap-1.5 text-[14px] font-semibold text-primary hover:gap-2.5 transition-all"
           >
             View all
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -71,61 +70,64 @@ export function FeaturedProducts() {
               const discount = calculateDiscount(p.price, p.salePrice);
               const finalPrice = p.salePrice || p.price;
               return (
-                <motion.button
+                <motion.div
                   key={p.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  onClick={() => openProductModal(p.id)}
-                  className="group relative rounded-3xl overflow-hidden bg-card border border-border text-left card-lift"
                 >
-                  <div className="relative aspect-square overflow-hidden bg-accent/40">
-                    {p.images?.[0] ? (
-                      <img
-                        src={p.images[0]}
-                        alt={p.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        loading="eager"
-                      />
-                    ) : null}
-                    {discount > 0 && (
-                      <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-gradient text-white text-[11px] font-semibold shadow-soft">
-                        -{discount}%
+                  <Link
+                    href={`/product/${p.slug}`}
+                    className="group relative block rounded-3xl overflow-hidden bg-card border border-border text-left card-lift"
+                  >
+                    <div className="relative aspect-square overflow-hidden bg-accent/40">
+                      {p.images?.[0] ? (
+                        <img
+                          src={p.images[0]}
+                          alt={p.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="eager"
+                        />
+                      ) : null}
+                      {discount > 0 && (
+                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-gradient text-white text-[11px] font-semibold shadow-soft">
+                          -{discount}%
+                        </span>
+                      )}
+                      <span className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md text-white text-[11px] font-medium">
+                        <Star className="w-3 h-3 fill-brand-orange-light text-brand-orange-light" />
+                        {p.rating || '4.5'}
                       </span>
-                    )}
-                    <span className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md text-white text-[11px] font-medium">
-                      <Star className="w-3 h-3 fill-brand-gold text-brand-gold" />
-                      {p.rating || '4.5'}
-                    </span>
-                  </div>
-                  <div className="p-4 space-y-1">
-                    {p.category && (
-                      <div className="text-[10px] uppercase tracking-wider text-primary font-semibold">
-                        {p.category.name}
-                      </div>
-                    )}
-                    <h3 className="font-fraunces text-[15px] font-semibold leading-snug line-clamp-2">
-                      {p.name}
-                    </h3>
-                    <div className="font-fraunces text-lg font-semibold text-foreground pt-1">
-                      {formatPrice(finalPrice)}
                     </div>
-                  </div>
-                </motion.button>
+                    <div className="p-4 space-y-1">
+                      {p.category && (
+                        <div className="text-[10px] uppercase tracking-wider text-primary font-bold">
+                          {p.category.name}
+                        </div>
+                      )}
+                      <h3 className="font-display text-[15px] font-bold leading-snug line-clamp-2">
+                        {p.name}
+                      </h3>
+                      <div className="font-display text-lg font-bold text-foreground pt-1">
+                        {formatPrice(finalPrice)}
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
               );
             })
           )}
         </div>
 
         <div className="mt-10 sm:hidden text-center">
-          <a
-            href="#catalog"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-brand-gradient text-white text-[14px] font-semibold"
+          <Link
+            href="/catalog"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-brand-gradient text-white text-[14px] font-bold"
           >
             View all products
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

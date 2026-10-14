@@ -61,3 +61,53 @@ Stage Summary:
 - Bulk ordering feature: full quote request form saves to DB, admin can view/mark contacted/complete/WhatsApp
 - Navbar: no admin button, prominent "Get Bulk Quote" CTA instead
 - Lint passes; all flows browser-verified
+
+---
+Task ID: 3 (multi-page + auth)
+Agent: main-agent (Super Z)
+Task: Restructure website to multi-page with hard-coded admin authentication, improve navbar.
+
+Work Log:
+- Created src/lib/auth.ts with hard-coded credentials (admin / arslan2025) and session token
+- Created src/middleware.ts to protect /admin/* routes (except /admin/login); unauthenticated users redirect to /admin/login?from=...
+- Created /api/auth/login (POST: validates credentials, sets httpOnly cookie arslan_admin_session)
+- Created /api/auth/logout (POST: clears cookie)
+- Created /admin/login page with login form, demo credentials hint, password show/hide toggle
+- Updated admin dashboard with Logout button in header (red destructive style)
+- Improved Navbar: uses Next.js Link + usePathname for active state, 6 nav items (Home/Catalog/Categories/Bulk Orders/About/Contact), shows underline indicator on active, adapts text color based on dark hero (home) vs light pages, mobile menu closes on link click
+- Created reusable StoreLayout component (wraps Navbar + main + Footer + ProductModal + FloatingActions)
+- Created reusable PageHeader component (eyebrow + title with italic accent + subtitle + breadcrumbs + dark/light variants)
+- Updated Hero CTAs to use Next.js Link to /catalog and /bulk-orders
+- Updated ProductCard to use Next.js Link to /product/[slug] instead of opening modal
+- Updated Categories component to use Link to /category/[slug]
+- Updated FeaturedProducts to use Link
+- Refactored Catalog component: removed section wrapping + inline header (PageHeader provides it now)
+- Created new pages:
+  - /catalog - PageHeader + Catalog component
+  - /categories - PageHeader + Categories grid (full version)
+  - /category/[slug] - PageHeader + products in that category
+  - /product/[slug] - Full product detail with gallery, specs, related products, WhatsApp/Call CTAs
+  - /bulk-orders - PageHeader (dark) + BulkOrders component
+  - /about - Brand story, values, stats grid, showroom map, CTA
+  - /contact - Contact cards, map, contact form (saves to bulk-order table as general inquiry), WhatsApp banner
+- Slimmed home page to be a landing page: Hero + Featured + Categories preview (6 cards) + Value props + Bulk teaser + About teaser + CTA
+- Updated footer with multi-page links (Pages + Categories + Reach Us columns)
+- Fixed ESLint errors: setState-in-effect (used cancelled flag pattern), unused eslint-disable directives
+- Verified via agent-browser:
+  * All routes return 200 (/ / /catalog / /categories / /about / /contact / /bulk-orders / /category/[slug] / /product/[slug] / /admin/login)
+  * /admin redirects (307) to /admin/login when not authenticated
+  * Login flow: enter credentials → submit → redirected to /admin dashboard with 16 products, 6 categories, logout button visible
+  * Logout button: clears cookie, redirects back to /admin/login
+  * Category page: shows products filtered by category (5 chairs for office-chairs)
+  * Product detail page: shows gallery, specs, related products (4), WhatsApp/Call CTAs
+  * Bulk orders form: submits successfully, shows "Message sent!" confirmation
+  * Contact form: submits, shows "Message sent!" confirmation, saves to bulk-order table
+- VLM confirmed: navbar has all multi-page links with active state, fonts are classy and bold
+
+Stage Summary:
+- Multi-page site with 9 routes (8 storefront + 1 admin) + /admin/login
+- Hard-coded admin auth (admin/arslan2025) via httpOnly cookie, protected by Next.js middleware
+- Navbar improved: multi-page nav, active state indicator, dark/light adaptive styling
+- Each page has detailed content + breadcrumb + PageHeader
+- Lint passes (0 errors, 0 warnings)
+- All flows browser-verified

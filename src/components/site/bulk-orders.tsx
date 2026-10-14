@@ -79,34 +79,12 @@ export function BulkOrders() {
   };
 
   return (
-    <section id="bulk" className="py-20 sm:py-32 bg-foreground text-white relative overflow-hidden">
+    <section id="bulk" className="py-20 sm:py-28 bg-foreground text-white relative overflow-hidden">
       {/* Decorative blobs */}
       <div className="absolute top-0 -right-32 w-96 h-96 rounded-full bg-brand-orange/20 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 -left-32 w-96 h-96 rounded-full bg-brand-orange-light/10 blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-14 max-w-3xl mx-auto"
-        >
-          <div className="text-eyebrow text-brand-orange-light mb-4">
-            For Businesses & Institutions
-          </div>
-          <h2 className="font-display text-hero text-white text-balance">
-            Bulk orders for
-            <span className="italic font-light text-brand-orange-light"> offices, schools & teams</span>
-          </h2>
-          <p className="mt-5 text-lg text-white/75 leading-relaxed text-pretty">
-            Equipping an entire office, school, or co-working space? Get wholesale pricing, free
-            installation, and dedicated project support. Tell us what you need and we'll send a
-            personalized quote within 24 hours.
-          </p>
-        </motion.div>
-
         {/* Benefits grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
           {BENEFITS.map((b, i) => (

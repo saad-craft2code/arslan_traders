@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Star, MapPin, Sparkles, Shield, Truck, ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, Star, Sparkles, Shield, Truck, ChevronDown } from 'lucide-react';
 
 // Hero image carousel - real furniture photos from the catalog
 const HERO_IMAGES = [
@@ -22,7 +23,6 @@ export function Hero() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Cycle images every 4s
   useEffect(() => {
     const t = setInterval(() => {
       setActiveImage((prev) => (prev + 1) % HERO_IMAGES.length);
@@ -131,19 +131,19 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
             className="mt-10 flex flex-col sm:flex-row items-start gap-3"
           >
-            <a
-              href="#catalog"
+            <Link
+              href="/catalog"
               className="group inline-flex items-center gap-3 px-8 py-5 rounded-full bg-brand-gradient text-white text-lg font-bold shadow-brand hover:scale-[1.03] active:scale-95 transition-transform"
             >
               <span>Explore Catalog</span>
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a
-              href="#bulk"
+            </Link>
+            <Link
+              href="/bulk-orders"
               className="inline-flex items-center gap-2 px-8 py-5 rounded-full glass-dark text-white text-lg font-bold hover:bg-white/10 transition-colors"
             >
               <span>Bulk Orders</span>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Trust strip */}
@@ -175,13 +175,11 @@ export function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <motion.a
-        href="#catalog"
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors"
-        aria-label="Scroll down"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/70"
       >
         <span className="text-[11px] uppercase tracking-[0.2em] font-semibold">Scroll</span>
         <motion.div
@@ -190,7 +188,7 @@ export function Hero() {
         >
           <ChevronDown className="w-5 h-5" />
         </motion.div>
-      </motion.a>
+      </motion.div>
 
       {/* Image dots indicator */}
       <div className="absolute bottom-8 right-8 z-10 hidden sm:flex items-center gap-2">

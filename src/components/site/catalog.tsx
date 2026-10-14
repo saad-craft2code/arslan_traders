@@ -20,7 +20,7 @@ const SORT_OPTIONS: { label: string; value: SortOption }[] = [
 ];
 
 export function Catalog() {
-  const { filters, setFilter, resetFilters, openProductModal } = useStore();
+  const { filters, setFilter, resetFilters } = useStore();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -78,31 +78,20 @@ export function Catalog() {
   };
 
   return (
-    <section id="catalog" className="py-20 sm:py-28 bg-background">
+    <div className="py-16 sm:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        {/* Header */}
+        {/* Toolbar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col gap-6 mb-10"
+          className="flex flex-col gap-3 mb-8"
         >
           <div className="flex items-end justify-between gap-4 flex-wrap">
-            <div>
-              <div className="text-[12px] uppercase tracking-[0.18em] text-primary font-semibold mb-2">
-                The Collection
-              </div>
-              <h2 className="font-fraunces text-hero text-foreground text-balance">
-                Browse our furniture catalog
-              </h2>
-              <p className="text-muted-foreground mt-2 text-base">
-                Hand-picked office furniture for every workspace — chairs, tables, workstations, and more.
-              </p>
-            </div>
             <div className="text-[14px] text-muted-foreground">
               {loading ? 'Loading...' : (
-                <span><span className="font-semibold text-foreground">{totalFound}</span> {totalFound === 1 ? 'item' : 'items'} found</span>
+                <span><span className="font-bold text-foreground text-lg">{totalFound}</span> {totalFound === 1 ? 'item' : 'items'} found</span>
               )}
             </div>
           </div>
@@ -265,7 +254,6 @@ export function Catalog() {
                   >
                     <ProductCard
                       product={p}
-                      onClick={() => openProductModal(p.id)}
                     />
                   </motion.div>
                 ))}
@@ -274,7 +262,7 @@ export function Catalog() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

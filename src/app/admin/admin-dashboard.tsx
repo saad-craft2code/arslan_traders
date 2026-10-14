@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Plus, Pencil, Trash2, Package, Tag, Inbox, ArrowLeft, Check,
   Image as ImageIcon, Upload, AlertCircle, ExternalLink, Phone, Mail, Building,
-  Clock, TrendingUp, X,
+  Clock, TrendingUp, X, LogOut,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { formatPrice, calculateDiscount } from '@/lib/format';
 import type { Product, Category } from '@/lib/types';
 import { toast } from 'sonner';
@@ -32,6 +33,7 @@ type BulkOrderType = {
 };
 
 export default function AdminDashboard() {
+  const router = useRouter();
   const [view, setView] = useState<AdminView>('overview');
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -65,6 +67,16 @@ export default function AdminDashboard() {
     refresh();
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      toast.success('Logged out');
+      router.push('/admin/login');
+    } catch (e) {
+      toast.error('Logout failed');
+    }
+  };
+
   const pendingOrders = orders.filter((o) => o.status === 'new');
   const totalRevenue = products.reduce((sum, p) => sum + (p.salePrice || p.price), 0);
   const avgPrice = products.length ? Math.round(totalRevenue / products.length) : 0;
@@ -95,14 +107,23 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
-          <Link
-            href="/"
-            target="_blank"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border text-[12px] font-semibold hover:bg-accent/60 transition-colors"
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">View site</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/"
+              target="_blank"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border text-[12px] font-semibold hover:bg-accent/60 transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">View site</span>
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-destructive/10 text-destructive border border-destructive/30 text-[12px] font-semibold hover:bg-destructive/20 transition-colors"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Logout</span>
+            </button>
+          </div>
         </div>
       </header>
 
