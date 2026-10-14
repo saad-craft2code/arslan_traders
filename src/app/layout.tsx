@@ -1,22 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { EB_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const ebGaramond = EB_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
 });
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const inter = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 const SITE_URL = "https://arslantraders.pk";
@@ -185,7 +185,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${playfair.variable} ${jakarta.variable} antialiased bg-background text-foreground`}
+        className={`${ebGaramond.variable} ${inter.variable} antialiased bg-background text-foreground`}
       >
         {children}
         <Toaster />

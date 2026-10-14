@@ -111,3 +111,25 @@ Stage Summary:
 - Each page has detailed content + breadcrumb + PageHeader
 - Lint passes (0 errors, 0 warnings)
 - All flows browser-verified
+
+---
+Task ID: 4 (font change)
+Agent: main-agent (Super Z)
+Task: Change font family - user wants "not so funky, classy and classy".
+
+Work Log:
+- Replaced Playfair_Display (high-contrast, magazine-y) with EB_Garamond (classic, refined, scholarly serif)
+- Replaced Plus_Jakarta_Sans (slightly geometric) with Inter (clean, neutral, timeless sans-serif)
+- Renamed CSS variables: --font-playfair → --font-display, --font-jakarta → --font-body
+- Updated .font-display utility to use EB Garamond with Georgia/Times New Roman fallbacks
+- Updated .font-body utility to use Inter with system-ui/-apple-system fallbacks
+- Refined typography scale: slightly smaller max sizes, gentler letter-spacing, reduced weights from 800→700 (display) and 700→600 (hero/headline) for a more refined, less heavy look
+- Updated favicon to use Georgia (system serif) instead of italic style
+- Lint passes (0 errors, 0 warnings)
+- VLM confirmed: "classy and elegant, avoiding any funky aesthetics, premium/sophisticated, refined and traditional serif"
+
+Stage Summary:
+- Display font: EB Garamond (classic classy serif, like literature)
+- Body font: Inter (clean, neutral, timeless)
+- More refined typography: gentler weights, less aggressive letter-spacing
+- All pages retain big bold look but with classier, more traditional feel
