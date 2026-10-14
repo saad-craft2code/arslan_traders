@@ -52,3 +52,28 @@ prompt
 server.log
 # Skills directory
 /skills/
+# Additional safety
+.env
+.env.local
+.env.*.local
+*.log
+.zscripts/*.pid
+.zscripts/*.log
+/zscripts/
+/scripts/local/
+# Local uploads (will use object storage in prod)
+/public/uploads/*.jpg
+/public/uploads/*.png
+/public/uploads/*.jpeg
+/public/uploads/*.webp
+/public/uploads/*.gif
+
+# Local SQLite database (deprecated - using PostgreSQL now)
+db/*.db
+db/*.db-journal
+
+# Download/preview artifacts (not for version control)
+/download/
+
+# Tests
+/tests/
