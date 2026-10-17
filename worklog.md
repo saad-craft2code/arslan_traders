@@ -133,3 +133,44 @@ Stage Summary:
 - Body font: Inter (clean, neutral, timeless)
 - More refined typography: gentler weights, less aggressive letter-spacing
 - All pages retain big bold look but with classier, more traditional feel
+
+---
+Task ID: 5 (business redesign)
+Agent: main-agent (Super Z)
+Task: Fix admin posting, redesign for business orientation (less AI), add COD + pre-payment, top SEO, text-only logo, premium fonts, classy animations.
+
+Work Log:
+- Fixed admin posting issue: .env was reverting to SQLite URL by dev script; now persistently set to PostgreSQL Neon URL
+- Verified admin posting end-to-end: POST /api/products creates product → appears in catalog
+- Switched fonts: Fraunces (variable serif with opsz/SOFT/WONK axes) + Inter
+- Created Logo component: text-only "ARSLAN TRADERS" with terracotta accent on "Traders" + tagline "Office Furniture · Pakistan"
+- Refined color palette: deep terracotta (oklch 0.50 0.155 35) primary, charcoal foreground, ivory background, brand-success green for COD
+- Rebuilt Navbar with text logo, direct category links ("Shop Chairs", "Shop Tables"), "Shop Now" CTA, "Free delivery in twin cities" badge
+- Rebuilt Hero: "Office Furniture for Pakistan's workspaces", payment hint pills (COD + Pre-Payment), trust strip
+- Added "How to Order" 3-step section + payment options banner on home page
+- Updated ProductCard: COD green badge, "Save X%" badge, "COD or pre-pay · Free delivery" hint
+- Updated Product detail page: "Order Now" CTA + "Call to Order", COD + Pre-Payment option cards, 3 trust badges (Free Delivery / 5-Yr Warranty / Easy Returns)
+- Updated Footer: text logo, payment/delivery badges, SEO keyword line covering all Pakistani cities
+- Added 50+ SEO keywords targeting Rawalpindi, Islamabad, Lahore, Karachi, Peshawar + all Pakistan
+- Added rich JSON-LD: FurnitureStore (with paymentAccepted, areaServed, knowsAbout, hasOfferCatalog) + Organization + ItemList
+- Created public/sitemap.xml with all routes + priorities
+- Updated public/robots.txt with admin/api disallow + sitemap reference
+- Added classy animations: btn-shine (shimmer on hover), img-zoom (smooth zoom on card hover), fade-up, card-lift
+- All animations use cubic-bezier(0.16, 1, 0.3, 1) easing for premium feel
+- Lint passes (0 errors, 0 warnings)
+- Production build succeeds: all 16 routes generated
+- VLM confirmed homepage is "highly business-oriented, avoids AI-generated look, focused on selling furniture with clear CTAs, text-only ARSLAN TRADERS logo, premium fonts"
+- VLM confirmed product detail page is "highly business-oriented with COD + Pre-Payment options clearly shown and trust badges prominently visible"
+- Pushed to GitHub: commit 1b62801
+
+Stage Summary:
+- Admin posting now works (was broken by .env reverting to SQLite)
+- Premium fonts: Fraunces + Inter
+- Text-only ARSLAN TRADERS logo everywhere
+- Deep terracotta + charcoal + ivory color scheme
+- COD + Pre-payment options on cards, detail page, hero, footer
+- "How to Order" 3-step process on home
+- Top-notch SEO: 50+ keywords, JSON-LD, sitemap, robots.txt
+- Classy animations: btn-shine, img-zoom, card-lift, fade-up
+- Lint passes, production build succeeds
+- VLM-verified business orientation
