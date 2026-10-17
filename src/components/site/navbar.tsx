@@ -2,15 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Phone, Package, ChevronRight } from 'lucide-react';
+import { Menu, X, Phone, ChevronRight, Truck } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { Logo } from './logo';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
+  { label: 'Shop Chairs', href: '/category/office-chairs' },
+  { label: 'Shop Tables', href: '/category/office-tables' },
   { label: 'Catalog', href: '/catalog' },
-  { label: 'Categories', href: '/categories' },
   { label: 'Bulk Orders', href: '/bulk-orders' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
@@ -28,12 +30,13 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Detect if we're on a page with dark hero (always use glass if scrolled)
+  // Detect if we're on a page with dark hero
   const isHome = pathname === '/';
   const onDarkBg = isHome && !scrolled;
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
+    // For category links, also match product detail pages in that category
     return pathname.startsWith(href);
   };
 
@@ -45,44 +48,24 @@ export function Navbar() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-          scrolled ? 'glass shadow-soft py-3' : onDarkBg ? 'py-5 bg-transparent' : 'py-5 bg-background/40 backdrop-blur-sm'
+          scrolled ? 'glass shadow-soft py-3' : onDarkBg ? 'py-5 bg-transparent' : 'py-4 bg-background/80 backdrop-blur-md border-b border-border/40'
         )}
       >
-        <nav className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex items-center justify-between">
+        <nav className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex items-center justify-between gap-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="w-11 h-11 rounded-2xl bg-foreground flex items-center justify-center shadow-soft transition-transform group-hover:scale-105">
-                <span className="font-display text-2xl font-extrabold italic text-brand-orange">A</span>
-              </div>
-            </div>
-            <div className="hidden sm:block leading-tight">
-              <div className={cn(
-                'font-display text-xl font-bold tracking-tight transition-colors',
-                onDarkBg ? 'text-white' : 'text-foreground'
-              )}>
-                Arslan Traders
-              </div>
-              <div className={cn(
-                'text-[10px] uppercase tracking-[0.22em] font-semibold transition-colors',
-                onDarkBg ? 'text-white/70' : 'text-muted-foreground'
-              )}>
-                Office Furniture · RWP / ISB
-              </div>
-            </div>
-          </Link>
+          <Logo light={onDarkBg} size="md" className="shrink-0" />
 
           {/* Desktop nav */}
-          <ul className="hidden lg:flex items-center gap-1">
+          <ul className="hidden lg:flex items-center gap-0.5">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   className={cn(
-                    'relative px-4 py-2 text-[14px] font-semibold rounded-full transition-all',
+                    'relative px-3.5 py-2 text-[14px] font-semibold rounded-full transition-all',
                     isActive(item.href)
-                      ? (onDarkBg ? 'text-brand-orange-light' : 'text-primary')
-                      : (onDarkBg ? 'text-white/80 hover:text-white' : 'text-foreground/80 hover:text-foreground')
+                      ? (onDarkBg ? 'text-brand-primary-light' : 'text-primary')
+                      : (onDarkBg ? 'text-white/85 hover:text-white' : 'text-foreground/80 hover:text-foreground')
                   )}
                 >
                   {item.label}
@@ -91,7 +74,7 @@ export function Navbar() {
                       layoutId="navbar-active-pill"
                       className={cn(
                         'absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full',
-                        onDarkBg ? 'bg-brand-orange-light' : 'bg-primary'
+                        onDarkBg ? 'bg-brand-primary-light' : 'bg-primary'
                       )}
                     />
                   )}
@@ -101,12 +84,21 @@ export function Navbar() {
           </ul>
 
           {/* Right actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Free delivery badge (desktop) */}
+            <div className={cn(
+              'hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold border',
+              onDarkBg ? 'glass-dark text-white border-white/10' : 'bg-accent/60 text-foreground border-border'
+            )}>
+              <Truck className="w-3.5 h-3.5 text-brand-success" />
+              <span>Free delivery in twin cities</span>
+            </div>
+
             <a
               href="tel:+923345121727"
               className={cn(
                 'hidden md:flex items-center gap-2 text-[14px] font-bold transition-colors',
-                onDarkBg ? 'text-white hover:text-brand-orange-light' : 'text-foreground hover:text-primary'
+                onDarkBg ? 'text-white hover:text-brand-primary-light' : 'text-foreground hover:text-primary'
               )}
             >
               <Phone className="w-4 h-4" />
@@ -114,11 +106,10 @@ export function Navbar() {
             </a>
 
             <Link
-              href="/bulk-orders"
-              className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-gradient text-white text-[14px] font-bold hover:shadow-brand transition-all hover:scale-[1.03] active:scale-95"
+              href="/catalog"
+              className="btn-shine hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-gradient text-white text-[14px] font-bold hover:shadow-brand transition-all hover:scale-[1.03] active:scale-95"
             >
-              <Package className="w-4 h-4" />
-              <span>Get Bulk Quote</span>
+              Shop Now
             </Link>
 
             <button
@@ -162,7 +153,7 @@ export function Navbar() {
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={cn(
-                        'flex items-center justify-between px-4 py-3 text-lg font-semibold rounded-2xl transition-colors',
+                        'flex items-center justify-between px-4 py-3 text-base font-semibold rounded-2xl transition-colors',
                         isActive(item.href) ? 'bg-brand-gradient text-white' : 'text-foreground hover:bg-accent/60'
                       )}
                     >
@@ -173,6 +164,10 @@ export function Navbar() {
                 ))}
               </ul>
               <div className="mt-4 pt-4 border-t border-border space-y-3">
+                <div className="flex items-center gap-2 px-4 text-[12px] text-muted-foreground">
+                  <Truck className="w-4 h-4 text-brand-success" />
+                  Free delivery in Rawalpindi & Islamabad
+                </div>
                 <a
                   href="tel:+923345121727"
                   className="flex items-center gap-3 text-[15px] font-bold text-foreground"
@@ -183,12 +178,11 @@ export function Navbar() {
                   <span>0334 5121727</span>
                 </a>
                 <Link
-                  href="/bulk-orders"
+                  href="/catalog"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-brand-gradient text-white font-bold"
                 >
-                  <Package className="w-4 h-4" />
-                  Get Bulk Quote
+                  Shop Now
                 </Link>
               </div>
             </motion.div>

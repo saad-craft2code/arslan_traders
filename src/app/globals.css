@@ -46,59 +46,61 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.5rem;
 
-  /* === Fresh & Classy Brand Palette === */
-  /* Clean warm white background + ink black text + burnt orange brand accent */
+  /* === Premium Business Palette === */
+  /* Sophisticated charcoal + cream + deep terracotta accent — premium, business-oriented */
 
-  --background: oklch(0.985 0.005 80);            /* warm off-white */
-  --foreground: oklch(0.14 0.01 50);             /* deep ink black */
+  --background: oklch(0.99 0.003 75);            /* near-white warm */
+  --foreground: oklch(0.16 0.012 50);             /* rich charcoal */
   --card: oklch(1 0 0);                          /* pure white cards */
-  --card-foreground: oklch(0.14 0.01 50);
+  --card-foreground: oklch(0.16 0.012 50);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.14 0.01 50);
+  --popover-foreground: oklch(0.16 0.012 50);
 
-  /* Brand accent: burnt orange - warm, classy, furniture-appropriate */
-  --primary: oklch(0.55 0.165 38);               /* burnt orange */
-  --primary-foreground: oklch(0.985 0.005 80);
+  /* Brand accent: deep terracotta — richer, more premium than bright orange */
+  --primary: oklch(0.50 0.155 35);               /* deep terracotta */
+  --primary-foreground: oklch(0.99 0.003 75);
 
-  --secondary: oklch(0.95 0.012 75);             /* warm cream */
-  --secondary-foreground: oklch(0.14 0.01 50);
+  --secondary: oklch(0.95 0.008 75);             /* warm cream */
+  --secondary-foreground: oklch(0.16 0.012 50);
 
-  --muted: oklch(0.96 0.008 75);
-  --muted-foreground: oklch(0.42 0.02 50);
+  --muted: oklch(0.96 0.005 75);
+  --muted-foreground: oklch(0.40 0.015 50);
 
-  --accent: oklch(0.92 0.04 55);                 /* soft peach */
-  --accent-foreground: oklch(0.14 0.01 50);
+  --accent: oklch(0.93 0.025 55);                 /* soft peach accent */
+  --accent-foreground: oklch(0.16 0.012 50);
 
-  --destructive: oklch(0.58 0.24 27);
-  --border: oklch(0.90 0.008 75);
-  --input: oklch(0.92 0.01 75);
-  --ring: oklch(0.55 0.165 38);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(0.90 0.006 75);
+  --input: oklch(0.92 0.008 75);
+  --ring: oklch(0.50 0.155 35);
 
-  --chart-1: oklch(0.55 0.165 38);
-  --chart-2: oklch(0.7 0.12 60);
-  --chart-3: oklch(0.4 0.04 50);
-  --chart-4: oklch(0.6 0.1 30);
-  --chart-5: oklch(0.78 0.08 80);
+  --chart-1: oklch(0.50 0.155 35);
+  --chart-2: oklch(0.7 0.10 60);
+  --chart-3: oklch(0.35 0.04 50);
+  --chart-4: oklch(0.55 0.10 30);
+  --chart-5: oklch(0.75 0.07 80);
 
-  --sidebar: oklch(0.985 0.005 80);
-  --sidebar-foreground: oklch(0.14 0.01 50);
-  --sidebar-primary: oklch(0.55 0.165 38);
-  --sidebar-primary-foreground: oklch(0.985 0.005 80);
-  --sidebar-accent: oklch(0.92 0.04 55);
-  --sidebar-accent-foreground: oklch(0.14 0.01 50);
-  --sidebar-border: oklch(0.90 0.008 75);
-  --sidebar-ring: oklch(0.55 0.165 38);
+  --sidebar: oklch(0.99 0.003 75);
+  --sidebar-foreground: oklch(0.16 0.012 50);
+  --sidebar-primary: oklch(0.50 0.155 35);
+  --sidebar-primary-foreground: oklch(0.99 0.003 75);
+  --sidebar-accent: oklch(0.93 0.025 55);
+  --sidebar-accent-foreground: oklch(0.16 0.012 50);
+  --sidebar-border: oklch(0.90 0.006 75);
+  --sidebar-ring: oklch(0.50 0.155 35);
 
   /* Brand tokens */
-  --brand-orange: oklch(0.55 0.165 38);
-  --brand-orange-deep: oklch(0.45 0.18 35);
-  --brand-orange-light: oklch(0.78 0.13 60);
-  --brand-ink: oklch(0.14 0.01 50);
-  --brand-cream: oklch(0.96 0.012 75);
-  --brand-ivory: oklch(0.985 0.005 80);
-  --brand-tan: oklch(0.85 0.06 65);
+  --brand-primary: oklch(0.50 0.155 35);          /* deep terracotta */
+  --brand-primary-dark: oklch(0.40 0.18 30);      /* espresso-brown */
+  --brand-primary-light: oklch(0.70 0.13 50);    /* warm sand */
+  --brand-ink: oklch(0.16 0.012 50);              /* charcoal */
+  --brand-ink-soft: oklch(0.30 0.012 50);         /* softer charcoal */
+  --brand-cream: oklch(0.96 0.008 75);
+  --brand-ivory: oklch(0.99 0.003 75);
+  --brand-tan: oklch(0.85 0.05 65);
+  --brand-success: oklch(0.55 0.14 145);          /* COD green */
 }
 
 .dark {
@@ -168,42 +170,48 @@
     text-wrap: pretty;
   }
 
-  /* === Typography scale - BIG, REFINED, CLASSY === */
+  /* === Typography scale - PREMIUM, REFINED, BUSINESS === */
   .text-display {
-    font-size: clamp(3.25rem, 8.5vw, 7.5rem);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
-    font-weight: 700;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 0;
   }
   .text-hero {
-    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
     font-weight: 600;
+    font-variation-settings: "opsz" 96, "SOFT" 40;
   }
   .text-headline {
-    font-size: clamp(1.85rem, 3.2vw, 3rem);
-    line-height: 1.12;
-    letter-spacing: -0.015em;
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     font-weight: 600;
+    font-variation-settings: "opsz" 48, "SOFT" 30;
   }
   .text-title {
-    font-size: clamp(1.3rem, 1.7vw, 1.65rem);
+    font-size: clamp(1.25rem, 1.6vw, 1.5rem);
     line-height: 1.25;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
     font-weight: 600;
+    font-variation-settings: "opsz" 24;
   }
   .text-eyebrow {
-    font-size: clamp(0.78rem, 0.88vw, 0.92rem);
+    font-size: clamp(0.72rem, 0.85vw, 0.85rem);
     line-height: 1;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     font-weight: 600;
+    font-family: var(--font-body), system-ui, sans-serif;
   }
 
   /* Display fonts */
   .font-display {
     font-family: var(--font-display), Georgia, 'Times New Roman', serif;
+    font-feature-settings: "ss01", "ss02", "ss03";
   }
   .font-body {
     font-family: var(--font-body), system-ui, -apple-system, sans-serif;
@@ -211,30 +219,30 @@
 
   /* Gradients */
   .bg-brand-gradient {
-    background: linear-gradient(135deg, oklch(0.55 0.165 38) 0%, oklch(0.45 0.18 35) 100%);
+    background: linear-gradient(135deg, oklch(0.50 0.155 35) 0%, oklch(0.40 0.18 30) 100%);
   }
   .bg-brand-gradient-warm {
-    background: linear-gradient(135deg, oklch(0.55 0.165 38) 0%, oklch(0.62 0.18 40) 50%, oklch(0.78 0.13 60) 100%);
+    background: linear-gradient(135deg, oklch(0.50 0.155 35) 0%, oklch(0.55 0.16 38) 50%, oklch(0.70 0.13 50) 100%);
   }
   .bg-brand-gradient-soft {
-    background: linear-gradient(180deg, oklch(0.985 0.005 80) 0%, oklch(0.96 0.012 75) 50%, oklch(0.92 0.04 55) 100%);
+    background: linear-gradient(180deg, oklch(0.99 0.003 75) 0%, oklch(0.96 0.008 75) 50%, oklch(0.93 0.025 55) 100%);
   }
   .bg-hero-gradient {
     background:
-      radial-gradient(ellipse 80% 60% at 50% 100%, oklch(0.55 0.165 38 / 0.18), transparent),
-      radial-gradient(ellipse 60% 40% at 0% 0%, oklch(0.78 0.13 60 / 0.12), transparent),
-      linear-gradient(180deg, oklch(0.985 0.005 80) 0%, oklch(0.96 0.012 75) 100%);
+      radial-gradient(ellipse 80% 60% at 50% 100%, oklch(0.50 0.155 35 / 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 0% 0%, oklch(0.70 0.13 50 / 0.10), transparent),
+      linear-gradient(180deg, oklch(0.99 0.003 75) 0%, oklch(0.96 0.008 75) 100%);
   }
 
   .text-gradient-ink {
-    background: linear-gradient(135deg, oklch(0.14 0.01 50) 0%, oklch(0.25 0.01 50) 50%, oklch(0.55 0.165 38) 100%);
+    background: linear-gradient(135deg, oklch(0.16 0.012 50) 0%, oklch(0.25 0.012 50) 50%, oklch(0.50 0.155 35) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
   .text-gradient-brand {
-    background: linear-gradient(135deg, oklch(0.55 0.165 38) 0%, oklch(0.45 0.18 35) 60%, oklch(0.62 0.18 40) 100%);
+    background: linear-gradient(135deg, oklch(0.50 0.155 35) 0%, oklch(0.40 0.18 30) 60%, oklch(0.55 0.16 38) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -324,8 +332,44 @@
     animation: pulse-glow 2.5s ease-in-out infinite;
   }
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 0 0 oklch(0.55 0.165 38 / 0.4); }
-    50% { box-shadow: 0 0 0 12px oklch(0.55 0.165 38 / 0); }
+    0%, 100% { box-shadow: 0 0 0 0 oklch(0.50 0.155 35 / 0.4); }
+    50% { box-shadow: 0 0 0 12px oklch(0.50 0.155 35 / 0); }
+  }
+
+  /* Subtle fade-in-up on enter (for buttons and key elements) */
+  .fade-up {
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Smooth image zoom on hover */
+  .img-zoom {
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .group:hover .img-zoom {
+    transform: scale(1.06);
+  }
+
+  /* Button shine effect */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-shine:hover::before {
+    left: 100%;
   }
 
   /* Marquee */

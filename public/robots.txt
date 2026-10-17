@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://arslantraders.pk/sitemap.xml
-
 # Block admin and API routes from indexing
+Disallow: /admin
 Disallow: /api/
+
+Sitemap: https://arslantraders.pk/sitemap.xml

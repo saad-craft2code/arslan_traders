@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Phone, MapPin, Clock, Facebook, Instagram, ArrowRight } from 'lucide-react';
+import { Phone, MapPin, Clock, Facebook, Instagram, ArrowRight, Banknote, CreditCard, Truck } from 'lucide-react';
+import { Logo } from './logo';
 
 export function Footer() {
   return (
@@ -10,23 +11,30 @@ export function Footer() {
         <div className="grid gap-10 lg:gap-8 lg:grid-cols-5">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 rounded-2xl bg-brand-gradient flex items-center justify-center">
-                <span className="font-display text-2xl font-extrabold italic text-white">A</span>
-              </div>
-              <div>
-                <div className="font-display text-xl font-bold">Arslan Traders</div>
-                <div className="text-[10px] uppercase tracking-[0.18em] text-background/60">
-                  Office Furniture · Est. Rawalpindi
-                </div>
-              </div>
-            </Link>
-            <p className="text-[14px] text-background/70 leading-relaxed max-w-md">
-              The leading office furniture store in Rawalpindi & Islamabad.
-              Premium chairs, tables, workstations, and storage at honest prices — backed by free
-              local delivery and expert installation.
+            <Logo light showTagline size="lg" />
+            <p className="mt-5 text-[14px] text-background/70 leading-relaxed max-w-md">
+              Pakistan's trusted destination for premium office furniture. Shop executive chairs,
+              office tables, workstations, sofas, and storage — with Cash on Delivery, free delivery
+              in Rawalpindi & Islamabad, and a 5-year warranty on premium items.
             </p>
 
+            {/* Payment & delivery badges */}
+            <div className="flex flex-wrap gap-2 mt-5">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background/10 text-[12px] font-semibold text-white">
+                <Banknote className="w-3.5 h-3.5 text-brand-success" />
+                COD
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background/10 text-[12px] font-semibold text-white">
+                <CreditCard className="w-3.5 h-3.5 text-brand-primary-light" />
+                Pre-Payment
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background/10 text-[12px] font-semibold text-white">
+                <Truck className="w-3.5 h-3.5 text-brand-primary-light" />
+                Free Delivery
+              </span>
+            </div>
+
+            {/* Social */}
             <div className="flex items-center gap-2 mt-5">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-10 h-10 rounded-full bg-background/10 hover:bg-background/20 flex items-center justify-center transition-colors">
                 <Facebook className="w-4 h-4" />
@@ -67,7 +75,7 @@ export function Footer() {
           {/* Categories */}
           <div>
             <h4 className="text-[11px] uppercase tracking-[0.18em] font-bold text-background/60 mb-4">
-              Categories
+              Shop
             </h4>
             <ul className="space-y-2.5 text-[14px]">
               {[
@@ -116,12 +124,25 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-background/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-background/50">
+        {/* SEO keyword line (helps search ranking) */}
+        <div className="mt-12 pt-6 border-t border-background/10 text-[11px] text-background/40 leading-relaxed">
+          <p className="mb-1">
+            <span className="font-semibold text-background/60">Office furniture in Rawalpindi, Islamabad & across Pakistan</span> —
+            Arslan Traders offers premium executive chairs, office tables, workstations, conference tables,
+            sofas, and storage cabinets with Cash on Delivery (COD) and pre-payment options.
+          </p>
+          <p>
+            Serving: Rawalpindi · Islamabad · Lahore · Karachi · Peshawar · Faisalabad · Multan · all Pakistan.
+            Located on Murree Road, Rawalpindi. Free delivery in twin cities.
+          </p>
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-background/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-background/50">
           <p>© {new Date().getFullYear()} Arslan Traders. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/admin" className="hover:text-background/80 transition-colors">Admin Login</Link>
             <span className="opacity-50">·</span>
-            <p>Office Furniture · Rawalpindi & Islamabad, Pakistan</p>
+            <p>Office Furniture · Rawalpindi · Islamabad · Pakistan</p>
           </div>
         </div>
       </div>

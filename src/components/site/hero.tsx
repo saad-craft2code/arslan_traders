@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Star, Sparkles, Shield, Truck, ChevronDown } from 'lucide-react';
+import { ArrowRight, Star, Sparkles, Shield, Truck, ChevronDown, Banknote, CreditCard } from 'lucide-react';
+import { Logo } from '@/components/site/logo';
 
 // Hero image carousel - real furniture photos from the catalog
 const HERO_IMAGES = [
@@ -26,7 +27,7 @@ export function Hero() {
   useEffect(() => {
     const t = setInterval(() => {
       setActiveImage((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 4000);
+    }, 4500);
     return () => clearInterval(t);
   }, []);
 
@@ -37,7 +38,6 @@ export function Hero() {
     >
       {/* Background: video + image carousel cross-fade */}
       <div className="absolute inset-0 z-0">
-        {/* Pexels video layer */}
         <video
           ref={videoRef}
           autoPlay
@@ -46,13 +46,12 @@ export function Hero() {
           playsInline
           preload="auto"
           onCanPlay={() => setVideoLoaded(true)}
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
         >
           <source src={PEXELS_VIDEO} type="video/mp4" />
           <source src={PEXELS_VIDEO_FALLBACK} type="video/mp4" />
         </video>
 
-        {/* Image carousel layer (always visible as fallback / overlay) */}
         <AnimatePresence mode="sync">
           {HERO_IMAGES.map((img, i) => (
             <motion.div
@@ -65,7 +64,7 @@ export function Hero() {
             >
               <img
                 src={img}
-                alt={`Office furniture showcase ${i + 1}`}
+                alt={`Office furniture Rawalpindi Islamabad Pakistan ${i + 1}`}
                 className="w-full h-full object-cover ken-burns"
                 loading="eager"
               />
@@ -73,9 +72,8 @@ export function Hero() {
           ))}
         </AnimatePresence>
 
-        {/* Dark gradient overlay for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-transparent" />
       </div>
 
       {/* Content */}
@@ -90,7 +88,7 @@ export function Hero() {
           >
             <div className="flex items-center gap-0.5">
               {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-4 h-4 text-brand-orange-light fill-brand-orange-light" />
+                <Star key={i} className="w-4 h-4 text-brand-primary-light fill-brand-primary-light" />
               ))}
             </div>
             <span className="font-bold text-base">4.7</span>
@@ -98,17 +96,17 @@ export function Hero() {
             <span className="opacity-80">183 Google Reviews</span>
           </motion.div>
 
-          {/* Headline - BIG, BOLD, CLASSY */}
+          {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-display text-white text-balance"
           >
-            Office Furniture,
+            Office Furniture
             <br />
             <span className="italic font-light">
-              Built to <span className="text-brand-orange-light font-extrabold not-italic">Inspire</span>.
+              for <span className="text-brand-primary-light font-extrabold not-italic">Pakistan's</span> workspaces
             </span>
           </motion.h1>
 
@@ -119,23 +117,39 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 text-xl sm:text-2xl text-white/85 max-w-2xl text-pretty font-light leading-relaxed"
           >
-            From executive chairs to conference tables — discover premium office
-            furniture at honest prices. Serving Rawalpindi & Islamabad with free
-            delivery and expert installation.
+            Shop premium executive chairs, office tables, workstations & more.
+            Cash on Delivery across Rawalpindi & Islamabad. Free delivery, 5-year warranty.
           </motion.p>
+
+          {/* Payment hint */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 flex flex-wrap items-center gap-3 text-[13px]"
+          >
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-dark text-white">
+              <Banknote className="w-4 h-4 text-brand-success" />
+              <span className="font-semibold">Cash on Delivery</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-dark text-white">
+              <CreditCard className="w-4 h-4 text-brand-primary-light" />
+              <span className="font-semibold">Pre-Payment Available</span>
+            </div>
+          </motion.div>
 
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="mt-10 flex flex-col sm:flex-row items-start gap-3"
           >
             <Link
               href="/catalog"
-              className="group inline-flex items-center gap-3 px-8 py-5 rounded-full bg-brand-gradient text-white text-lg font-bold shadow-brand hover:scale-[1.03] active:scale-95 transition-transform"
+              className="btn-shine group inline-flex items-center gap-3 px-8 py-5 rounded-full bg-brand-gradient text-white text-lg font-bold shadow-brand hover:scale-[1.03] active:scale-95 transition-transform"
             >
-              <span>Explore Catalog</span>
+              <span>Shop the Catalog</span>
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
@@ -150,17 +164,17 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="mt-14 grid grid-cols-3 gap-6 sm:gap-12 w-full max-w-2xl"
           >
             {[
               { icon: Shield, title: '5-Year Warranty', subtitle: 'On premium items' },
-              { icon: Truck, title: 'Free Delivery', subtitle: 'In twin cities' },
+              { icon: Truck, title: 'Free Delivery', subtitle: 'Twin cities + nationwide' },
               { icon: Sparkles, title: '500+ Designs', subtitle: 'In stock & ready' },
             ].map((item, i) => (
               <div key={i} className="flex flex-col items-start">
                 <div className="w-12 h-12 rounded-2xl glass-dark flex items-center justify-center mb-3">
-                  <item.icon className="w-5 h-5 text-brand-orange-light" strokeWidth={2.2} />
+                  <item.icon className="w-5 h-5 text-brand-primary-light" strokeWidth={2.2} />
                 </div>
                 <div className="text-[15px] sm:text-base font-bold text-white">
                   {item.title}
@@ -190,14 +204,14 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Image dots indicator */}
+      {/* Image dots */}
       <div className="absolute bottom-8 right-8 z-10 hidden sm:flex items-center gap-2">
         {HERO_IMAGES.map((_, i) => (
           <button
             key={i}
             onClick={() => setActiveImage(i)}
             className={`h-1.5 rounded-full transition-all ${
-              i === activeImage ? 'w-8 bg-brand-orange-light' : 'w-2 bg-white/40 hover:bg-white/60'
+              i === activeImage ? 'w-8 bg-brand-primary-light' : 'w-2 bg-white/40 hover:bg-white/60'
             }`}
             aria-label={`Show image ${i + 1}`}
           />

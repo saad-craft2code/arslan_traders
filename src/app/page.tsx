@@ -2,7 +2,11 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Package, Store, MapPin, Phone, Star, Shield, Truck, Sparkles, MessageCircle } from 'lucide-react';
+import {
+  ArrowRight, Package, Store, MapPin, Phone, Star, Shield, Truck, Sparkles,
+  MessageCircle, Banknote, CreditCard, ShoppingBag, MousePointerClick, ClipboardCheck,
+  Boxes, Clock,
+} from 'lucide-react';
 import { StoreLayout } from '@/components/site/store-layout';
 import { Hero } from '@/components/site/hero';
 import { FeaturedProducts } from '@/components/site/featured-products';
@@ -13,6 +17,28 @@ export default function Home() {
     <StoreLayout>
       {/* Hero with video */}
       <Hero />
+
+      {/* Trust bar */}
+      <section className="bg-foreground text-white py-5">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            {[
+              { icon: Star, value: '4.7★', label: 'Google Rating' },
+              { icon: Truck, value: 'Free', label: 'Delivery in Twin Cities' },
+              { icon: Banknote, value: 'COD', label: 'Cash on Delivery' },
+              { icon: Boxes, value: '500+', label: 'Designs in Stock' },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center justify-center gap-2">
+                <item.icon className="w-5 h-5 text-brand-primary-light shrink-0" />
+                <div className="text-left">
+                  <div className="font-display text-base font-bold leading-none">{item.value}</div>
+                  <div className="text-[11px] text-white/70 uppercase tracking-wider mt-0.5">{item.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Featured products */}
       <FeaturedProducts />
@@ -28,13 +54,14 @@ export default function Home() {
             className="text-center mb-12"
           >
             <div className="text-eyebrow text-primary mb-3">
-              Explore by Category
+              Shop by Category
             </div>
             <h2 className="font-display text-hero text-foreground text-balance">
-              Everything your office needs
+              Find the right furniture
+              <span className="italic font-light"> for your space</span>
             </h2>
             <p className="mt-3 text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-              Six curated collections covering every workspace scenario — from executive suites to staff workstations.
+              From executive chairs to conference tables — explore our six collections covering every workspace need.
             </p>
           </motion.div>
 
@@ -43,7 +70,7 @@ export default function Home() {
           <div className="text-center mt-10">
             <Link
               href="/categories"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card text-[14px] font-semibold text-foreground hover:bg-accent/60 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card text-[14px] font-bold text-foreground hover:bg-accent/60 transition-colors"
             >
               View all categories
               <ArrowRight className="w-4 h-4" />
@@ -52,8 +79,107 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Value props */}
+      {/* How to Order - business clarity */}
       <section className="py-20 sm:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mb-14 max-w-3xl mx-auto"
+          >
+            <div className="text-eyebrow text-primary mb-3">
+              How to Order
+            </div>
+            <h2 className="font-display text-hero text-foreground text-balance">
+              Simple ordering,
+              <span className="italic font-light"> your way</span>
+            </h2>
+            <p className="mt-3 text-muted-foreground text-base sm:text-lg">
+              Three easy steps to furnish your workspace. Choose Cash on Delivery or pre-pay — your call.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                num: '01',
+                icon: MousePointerClick,
+                title: 'Browse & Select',
+                desc: 'Pick your furniture from our catalog of 500+ designs — chairs, tables, workstations, sofas, and more.',
+              },
+              {
+                num: '02',
+                icon: ClipboardCheck,
+                title: 'Place Your Order',
+                desc: 'Message us on WhatsApp or call 0334 5121727. Choose Cash on Delivery or pre-payment via bank transfer.',
+              },
+              {
+                num: '03',
+                icon: Truck,
+                title: 'Free Delivery & Setup',
+                desc: 'We deliver free across Rawalpindi & Islamabad, with professional installation included. Pay cash on arrival.',
+              },
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="relative p-6 sm:p-8 rounded-3xl bg-card border border-border card-lift"
+              >
+                <div className="absolute top-6 right-6 font-display text-5xl font-bold text-accent/80 select-none">
+                  {step.num}
+                </div>
+                <div className="w-14 h-14 rounded-2xl bg-brand-gradient flex items-center justify-center shadow-brand mb-5">
+                  <step.icon className="w-6 h-6 text-white" strokeWidth={2.1} />
+                </div>
+                <h3 className="font-display text-xl font-bold text-foreground mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-[14px] text-muted-foreground leading-relaxed">{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Payment options banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 grid sm:grid-cols-2 gap-4"
+          >
+            <div className="p-5 rounded-2xl bg-brand-success/10 border border-brand-success/30 flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-brand-success flex items-center justify-center shrink-0">
+                <Banknote className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="font-display text-base font-bold text-foreground mb-1">Cash on Delivery (COD)</h3>
+                <p className="text-[13px] text-muted-foreground leading-relaxed">
+                  Available across Rawalpindi & Islamabad. Inspect your order before paying. No advance required.
+                </p>
+              </div>
+            </div>
+            <div className="p-5 rounded-2xl bg-primary/10 border border-primary/30 flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-brand-gradient flex items-center justify-center shrink-0">
+                <CreditCard className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="font-display text-base font-bold text-foreground mb-1">Pre-Payment</h3>
+                <p className="text-[13px] text-muted-foreground leading-relaxed">
+                  Bank transfer or mobile wallet (Easypaisa/JazzCash). Online payment gateway coming soon.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Value props */}
+      <section className="py-20 sm:py-28 bg-secondary/40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -63,22 +189,23 @@ export default function Home() {
             className="text-center mb-12"
           >
             <div className="text-eyebrow text-primary mb-3">
-              Why Choose Us
+              Why Choose Arslan Traders
             </div>
             <h2 className="font-display text-hero text-foreground text-balance">
-              The trusted furniture partner
+              Pakistan's trusted
+              <span className="italic font-light"> furniture partner</span>
             </h2>
             <p className="mt-3 text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-              Serving Rawalpindi & Islamabad for over a decade with quality furniture and honest service.
+              Serving Rawalpindi, Islamabad, and all of Pakistan for over a decade with quality furniture and honest service.
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Shield, title: '5-Year Warranty', desc: 'On premium items' },
-              { icon: Truck, title: 'Free Delivery', desc: 'In Rawalpindi & Islamabad' },
-              { icon: Sparkles, title: '500+ Designs', desc: 'In stock & ready to ship' },
-              { icon: Star, title: '4.7 Star Rating', desc: 'From 183 Google reviews' },
+              { icon: Shield, title: '5-Year Warranty', desc: 'On all premium furniture items' },
+              { icon: Truck, title: 'Free Delivery', desc: 'Across Rawalpindi & Islamabad' },
+              { icon: Sparkles, title: '500+ Designs', desc: 'In stock and ready to ship' },
+              { icon: Clock, title: '10+ Years', desc: 'Trusted by 1000+ customers' },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -103,8 +230,8 @@ export default function Home() {
 
       {/* Bulk orders teaser */}
       <section className="py-20 sm:py-28 bg-foreground text-white relative overflow-hidden">
-        <div className="absolute top-0 -right-32 w-96 h-96 rounded-full bg-brand-orange/20 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 -left-32 w-96 h-96 rounded-full bg-brand-orange-light/10 blur-3xl pointer-events-none" />
+        <div className="absolute top-0 -right-32 w-96 h-96 rounded-full bg-brand-primary/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 -left-32 w-96 h-96 rounded-full bg-brand-primary-light/10 blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -112,22 +239,22 @@ export default function Home() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="text-eyebrow text-brand-orange-light mb-3">
+            <div className="text-eyebrow text-brand-primary-light mb-3">
               For Businesses & Institutions
             </div>
             <h2 className="font-display text-hero text-white text-balance">
               Bulk orders for
-              <span className="italic font-light text-brand-orange-light"> offices, schools & teams</span>
+              <span className="italic font-light text-brand-primary-light"> offices, schools & teams</span>
             </h2>
             <p className="mt-5 text-lg text-white/75 leading-relaxed text-pretty">
-              Equipping an entire office, school, or co-working space? Get wholesale pricing,
-              free installation, and dedicated project support. Tell us what you need and we'll
-              send a personalized quote within 24 hours.
+              Furnishing an entire office, school, or co-working space? Get wholesale pricing,
+              free installation, and dedicated project support. Tell us what you need and we'll send a
+              personalized quote within 24 hours.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <Link
                 href="/bulk-orders"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-gradient text-white text-[15px] font-bold hover:scale-[1.02] transition-transform"
+                className="btn-shine inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-gradient text-white text-[15px] font-bold hover:scale-[1.02] transition-transform"
               >
                 <Package className="w-5 h-5" />
                 Get Bulk Quote
@@ -180,12 +307,13 @@ export default function Home() {
               Our Story
             </div>
             <h2 className="font-display text-hero text-foreground text-balance">
-              Rawalpindi's trusted name in office furniture
+              A decade of trust
+              <span className="italic font-light"> on Murree Road</span>
             </h2>
             <p className="mt-5 text-[15px] sm:text-[16px] text-muted-foreground leading-relaxed">
-              For over a decade, Arslan Traders has been the go-to destination for premium office
-              furniture across Rawalpindi and Islamabad. Located on the historic Murree Road, our
-              showroom brings together the finest selection of executive chairs, office tables,
+              For over 10 years, Arslan Traders has been the go-to destination for premium office
+              furniture across Rawalpindi, Islamabad, and beyond. Located on the historic Murree Road,
+              our showroom brings together the finest selection of executive chairs, office tables,
               workstations, and storage solutions — all backed by honest pricing and exceptional service.
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4">
@@ -266,19 +394,20 @@ export default function Home() {
           >
             <Store className="w-12 h-12 mx-auto text-primary mb-4" strokeWidth={2} />
             <h2 className="font-display text-hero text-foreground text-balance">
-              Ready to furnish your workspace?
+              Ready to furnish
+              <span className="italic font-light"> your workspace?</span>
             </h2>
             <p className="mt-4 text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-              Visit our Murree Road showroom today, or reach out on WhatsApp for instant assistance.
-              Our team is ready to help you find the perfect furniture for your office.
+              Browse our catalog, visit our Murree Road showroom, or message us on WhatsApp.
+              We deliver across Rawalpindi, Islamabad, and all of Pakistan — COD available.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
               <Link
                 href="/catalog"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-gradient text-white text-[15px] font-bold hover:scale-[1.02] transition-transform"
+                className="btn-shine inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-brand-gradient text-white text-[15px] font-bold hover:scale-[1.02] transition-transform"
               >
-                Browse Catalog
-                <ArrowRight className="w-4 h-4" />
+                <ShoppingBag className="w-4 h-4" />
+                Shop Catalog
               </Link>
               <a
                 href={`https://wa.me/923345121727?text=${encodeURIComponent(

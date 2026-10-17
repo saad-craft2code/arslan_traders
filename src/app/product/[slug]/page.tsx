@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Star, Phone, MessageCircle, ShoppingBag, Ruler, Palette, Layers, Tag, ChevronLeft, ArrowRight } from 'lucide-react';
+import { Star, Phone, MessageCircle, ShoppingBag, Ruler, Palette, Layers, Tag, ChevronLeft, ArrowRight, Truck, Wallet, ShieldCheck, CreditCard, Banknote } from 'lucide-react';
 import { StoreLayout } from '@/components/site/store-layout';
 import { ProductCard } from '@/components/site/product-card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -243,28 +243,64 @@ export default function ProductDetailPage() {
               <div className="mt-8 grid grid-cols-2 gap-3">
                 <a
                   href={`https://wa.me/923345121727?text=${encodeURIComponent(
-                    `Hi Arslan Traders, I'm interested in: ${product.name} (${formatPrice(finalPrice)})`
+                    `Hi Arslan Traders, I'd like to order: ${product.name} (${formatPrice(finalPrice)}). Please confirm COD or pre-payment options.`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-5 py-4 rounded-full bg-brand-gradient text-white text-[14px] font-bold hover:scale-[1.02] transition-transform"
+                  className="btn-shine flex items-center justify-center gap-2 px-5 py-4 rounded-full bg-brand-gradient text-white text-[14px] font-bold hover:scale-[1.02] transition-transform"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  Order via WhatsApp
+                  Order Now
                 </a>
                 <a
                   href="tel:+923345121727"
                   className="flex items-center justify-center gap-2 px-5 py-4 rounded-full border border-border text-foreground text-[14px] font-bold hover:bg-accent/60 transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  Call Now
+                  Call to Order
                 </a>
               </div>
 
-              {/* Trust info */}
-              <div className="mt-6 p-4 rounded-2xl bg-accent/40 border border-border text-[13px] text-muted-foreground">
-                <div className="font-bold text-foreground mb-1">Showroom pickup available</div>
-                Visit our Murree Road showroom to see this item in person. Free delivery in Rawalpindi & Islamabad.
+              {/* Payment & Delivery options */}
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                <div className="p-3 rounded-2xl bg-brand-success/10 border border-brand-success/30">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Banknote className="w-4 h-4 text-brand-success" />
+                    <span className="text-[13px] font-bold text-foreground">Cash on Delivery</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground">Pay when your order arrives. Available across Rawalpindi & Islamabad.</p>
+                </div>
+                <div className="p-3 rounded-2xl bg-primary/10 border border-primary/30">
+                  <div className="flex items-center gap-2 mb-1">
+                    <CreditCard className="w-4 h-4 text-primary" />
+                    <span className="text-[13px] font-bold text-foreground">Pre-Payment</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground">Bank transfer or mobile wallet. Online payment gateway coming soon.</p>
+                </div>
+              </div>
+
+              {/* Trust badges */}
+              <div className="mt-5 p-4 rounded-2xl bg-accent/40 border border-border">
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div>
+                    <Truck className="w-5 h-5 mx-auto text-primary mb-1" />
+                    <div className="text-[11px] font-bold text-foreground">Free Delivery</div>
+                    <div className="text-[10px] text-muted-foreground">Twin cities</div>
+                  </div>
+                  <div>
+                    <ShieldCheck className="w-5 h-5 mx-auto text-primary mb-1" />
+                    <div className="text-[11px] font-bold text-foreground">5-Yr Warranty</div>
+                    <div className="text-[10px] text-muted-foreground">On premium items</div>
+                  </div>
+                  <div>
+                    <Wallet className="w-5 h-5 mx-auto text-primary mb-1" />
+                    <div className="text-[11px] font-bold text-foreground">Easy Returns</div>
+                    <div className="text-[10px] text-muted-foreground">7-day policy</div>
+                  </div>
+                </div>
+                <p className="text-[12px] text-muted-foreground mt-3 text-center">
+                  Visit our <Link href="/about" className="text-primary font-semibold hover:underline">Murree Road showroom</Link> to see this item in person.
+                </p>
               </div>
             </motion.div>
           </div>
