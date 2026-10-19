@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils';
 
 /**
  * Text-only brand logo: "ARSLAN TRADERS"
- * - Always uses Fraunces (font-display) for the wordmark
- * - Letter-spaced uppercase, bold
+ * - Uses Geist Sans (Vercel's premium font) for the wordmark
+ * - Letter-spaced uppercase, semibold
  * - Color adapts to parent (uses currentColor by default)
  * - Optional `light` prop to force light text on dark backgrounds
  */
@@ -24,9 +24,9 @@ export function Logo({
   size?: 'sm' | 'md' | 'lg';
 }) {
   const sizeClasses = {
-    sm: 'text-base sm:text-lg',
-    md: 'text-lg sm:text-xl',
-    lg: 'text-2xl sm:text-3xl',
+    sm: 'text-[15px] sm:text-base',
+    md: 'text-base sm:text-lg',
+    lg: 'text-xl sm:text-2xl',
   };
   const taglineSize = {
     sm: 'text-[8px]',
@@ -42,7 +42,7 @@ export function Logo({
     >
       <span
         className={cn(
-          'font-display font-extrabold tracking-[0.05em] sm:tracking-[0.08em] uppercase transition-colors',
+          'font-display font-semibold tracking-[0.08em] sm:tracking-[0.12em] uppercase transition-colors',
           sizeClasses[size],
           light ? 'text-white' : 'text-foreground'
         )}
@@ -52,7 +52,7 @@ export function Logo({
       {showTagline && (
         <span
           className={cn(
-            'mt-1 uppercase tracking-[0.28em] sm:tracking-[0.32em] font-semibold transition-colors',
+            'mt-1 uppercase tracking-[0.28em] sm:tracking-[0.32em] font-medium transition-colors',
             taglineSize[size],
             light ? 'text-white/70' : 'text-muted-foreground'
           )}
